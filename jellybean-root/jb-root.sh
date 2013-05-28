@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 
 if [ -z $1 ]
@@ -43,7 +43,7 @@ $1 shell rm /data/local.prop
 $1 shell rm /data/local/tmp
 $1 shell mv /data/local/tmp.bak /data/local/tmp
 $1 reboot
-echo "Done"
+echo "Done. Press enter to exit"
 read
 
 exit 0
