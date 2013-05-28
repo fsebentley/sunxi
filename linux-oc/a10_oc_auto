@@ -1,0 +1,13 @@
+#!/bin/bash
+clear
+echo "Overclocker for A10 Debian - Autostart Overclocker"
+echo "by CidDeamonPL"
+echo ""
+echo "Changing minimum frequency"
+echo $1 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+echo "Changing maximum frequency"
+echo $2 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo "Changing governor"
+echo $3 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo done
+
