@@ -1,0 +1,41 @@
+#!/bin/bash
+clear
+
+if [ -z $1 ] || [ -z $2 ] || [ -z $3 ]
+then
+     echo "Usage: ./man.bash MIN_FREQ_KHZ MAX_FREQ_KHZ GOVERNOR"
+     echo ""
+     echo "Available governors"
+     cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
+     echo ""
+     echo "Available frequencies"
+     cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_frequencies
+     echo ""
+     exit 1
+fi
+
+echo "Changing minimum frequency"
+echo $1 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+echo "Changing maximum frequency"
+echo $2 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+echo "Changing governor"
+echo $3 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+echo ""
+echo "=========================="
+while [ 1 ]
+do
+	echo "Overclocker for A10 Debian - Manual Overclocker"
+	echo "by CidDaemon"
+	echo ""
+	echo "Current frequency:        $((`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq`/1000)) MHz"
+	echo "Minimum frequency:        $((`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq`/1000)) MHz"
+	echo "Maximum frequency:        $((`cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq`/1000)) MHz"
+	echo -n "Governor:                 "
+	more /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+	echo "Maximum battery capacity: $((`cat /sys/class/power_supply/battery/voltage_max_design`/1000)) mV"
+	echo "Battery capacity now:     $((`cat /sys/class/power_supply/battery/voltage_now`/1000)) mV"
+	echo "Battery percentage:       `cat /sys/class/power_supply/battery/capacity`%"
+	sleep 5
+	clear
+done
+
