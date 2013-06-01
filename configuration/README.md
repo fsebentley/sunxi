@@ -1,5 +1,4 @@
-Configuration of phablet.
-Some files grabbed from stock FW, some are logs.
+Configuration of phablet. Some files grabbed from stock FW, some are logs.
 
 -> bootloader - important files from nanda partition
 
@@ -10,3 +9,5 @@ Some files grabbed from stock FW, some are logs.
 -> memstatic.log - output of a10-meminfo-static - info about memory
 
 -> modules.log - list of modules - recursive listing files available in /system/vendor/modules
+
+-> build*.prop - build.prop files from Android 4.0.3 and Android 4.1.1
