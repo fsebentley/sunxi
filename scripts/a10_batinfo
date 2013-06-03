@@ -1,9 +1,14 @@
 #!/bin/bash
 while [ 1 ]
 do
-  clear
-	echo "Maximum battery capacity: $((`cat /sys/class/power_supply/battery/voltage_max_design`/1000)) mV"
-	echo "Battery capacity now:     $((`cat /sys/class/power_supply/battery/voltage_now`/1000)) mV"
-	echo "Battery percentage:       `cat /sys/class/power_supply/battery/capacity`%"
+	clear
+	echo "Status:           `cat /sys/class/power_supply/battery/status`"
+	echo "Percentage:       `cat /sys/class/power_supply/battery/capacity`%"
+	echo "Maximum capacity: $((`cat /sys/class/power_supply/battery/voltage_max_design`/1000))mV"
+	echo "Capacity now:     $((`cat /sys/class/power_supply/battery/voltage_now`/1000))mV"
+	echo "Health:           `cat /sys/class/power_supply/battery/health`"
+	echo "Model name:       `cat /sys/class/power_supply/battery/model_name`"
+	echo "Technology:       `cat /sys/class/power_supply/battery/technology`"
+	echo "Temperature:      $((`cat /sys/class/power_supply/battery/temp`/10))°C"
 	sleep 5
 done
