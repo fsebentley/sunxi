@@ -1,0 +1,9 @@
+#!/bin/bash
+while [ 1 ]
+do
+  clear
+	echo "Maximum battery capacity: $((`cat /sys/class/power_supply/battery/voltage_max_design`/1000)) mV"
+	echo "Battery capacity now:     $((`cat /sys/class/power_supply/battery/voltage_now`/1000)) mV"
+	echo "Battery percentage:       `cat /sys/class/power_supply/battery/capacity`%"
+	sleep 5
+done
