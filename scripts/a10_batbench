@@ -1,0 +1,19 @@
+#!/bin/bash
+MINS=0
+DT_N=`date +%Y%m%d-%H%M%S`
+printf "Dates of stats grabbing:\n\n" > DBG01-$DT_N.log
+printf "Battery percentages:\n\n" > DBG02-$DT_N.log
+printf "Battery voltages:\n\n" > DBG03-$DT_N.log
+printf "Battery temperatures:\n\n" > DBG04-$DT_N.log
+while [ 1 ]
+do
+  clear
+	printf "                    Battery debugging mode is ON.\n         Please do not touch device till battery will die.\nStats will be send to DBG0X-DATE-TIME.log, you can make chart later.\n                        Press CTRL+C to exit\n\n$MINS minutes of test passed."
+	DT_L=`date "+%Y/%m/%d, %H:%M:%S"`
+	echo $DT_L >> DBG01-$DT_N.log
+	cat /sys/class/power_supply/battery/capacity >> DBG02-$DT_N.log
+	echo $((`cat /sys/class/power_supply/battery/voltage_now`/1000)) >> DBG03-$DT_N.log
+	echo $((`cat /sys/class/power_supply/battery/temp`/10)) >> DBG04-$DT_N.log
+	sleep 60
+	let MINS=$MINS+1
+done
