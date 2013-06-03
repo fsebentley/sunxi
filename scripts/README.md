@@ -2,6 +2,11 @@ Scripts for Linux
 
 Push files to /usr/bin, chmod 777 and login-logout. You'll be able to use scripts from ANY place. 
 
+a10_batinfo $1
+--------------
+
+Check battery states - health, percentage, voltage etc. You can use $1 to set refresh delay (e.g. a10_batinfo 35)
+
 a10_oc_auto min_khz max_khz governor
 ------------------------------------
 
