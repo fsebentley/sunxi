@@ -9,18 +9,18 @@ fi
 while [ 1 ]
 do
 	clear
-	printf "Refreshing stats every $REPEAT seconds.../nPress CTRL+C to exit/n"
+	printf "Refreshing stats every $REPEAT seconds...\nPress CTRL+C to exit\n"
 	if [ -z $1 ]
 	then
-		printf "Tip: You can use $1 (1st parameter) to set refresh delay/n"
+		printf "Tip: You can use 1st parameter to set refresh delay\n\n"
 	fi
-	printf "/nStatus:           `cat /sys/class/power_supply/battery/status`/n"
-	printf "Percentage:       `cat /sys/class/power_supply/battery/capacity`%/n"
-	printf "Maximum capacity: $((`cat /sys/class/power_supply/battery/voltage_max_design`/1000))mV/n"
-	printf "Capacity now:     $((`cat /sys/class/power_supply/battery/voltage_now`/1000))mV/n"
-	printf "Health:           `cat /sys/class/power_supply/battery/health`/n"
-	printf "Model name:       `cat /sys/class/power_supply/battery/model_name`/n"
-	printf "Technology:       `cat /sys/class/power_supply/battery/technology`/n"
-	printf "Temperature:      $((`cat /sys/class/power_supply/battery/temp`/10))°C"
+	echo "Status:           `cat /sys/class/power_supply/battery/status`"
+	echo "Percentage:       `cat /sys/class/power_supply/battery/capacity`%"
+	echo "Maximum capacity: $((`cat /sys/class/power_supply/battery/voltage_max_design`/1000))mV"
+	echo "Capacity now:     $((`cat /sys/class/power_supply/battery/voltage_now`/1000))mV"
+	echo "Health:           `cat /sys/class/power_supply/battery/health`"
+	echo "Model name:       `cat /sys/class/power_supply/battery/model_name`"
+	echo "Technology:       `cat /sys/class/power_supply/battery/technology`"
+	echo "Temperature:      $((`cat /sys/class/power_supply/battery/temp`/10))°C"
 	sleep $REPEAT
 done
