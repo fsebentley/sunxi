@@ -1,19 +1,60 @@
 #!/bin/bash
+
+#defintions
 MINS=0
 DT_N=`date +%Y%m%d-%H%M%S`
+
+#check if battery is 95% or more (u can force it with -f parameter)
+if [[ "$1" = "-f" ]]; then
+	clear
+	printf "Force Mode enabled\nPlease remember, that overall results and ETA can be not true!\n\n"
+else
+	if [[ `cat /sys/class/power_supply/battery/capacity` < 95 ]]; then
+		clear
+		printf "ERROR: To make benchmark reliable, you can't start if you have not fully charged battery.\nYou can force it, using \"-f\" parameter\n"
+		exit 1
+	fi
+fi
+
+#headers of output files
 printf "Dates of stats grabbing:\n\n" > DBG01-$DT_N.log
 printf "Battery percentages:\n\n" > DBG02-$DT_N.log
 printf "Battery voltages:\n\n" > DBG03-$DT_N.log
 printf "Battery temperatures:\n\n" > DBG04-$DT_N.log
+
+#infinite loop
 while [ 1 ]
 do
-  clear
-	printf "                    Battery debugging mode is ON.\n         Please do not touch device till battery will die.\nStats will be send to DBG0X-DATE-TIME.log, you can make chart later.\n                        Press CTRL+C to exit\n\n$MINS minutes of test passed."
+
+	#infos
+	printf "                    Battery debugging mode is ON.\n         Please do not touch device till battery will die.\nStats will be send to DBG0X-DATE-TIME.log, you can make chart later.\n                        Press CTRL+C to exit\n\n$MINS minutes of test passed.\n"
+
+	#display elapsed time if +1 minutes of test passed
+	if [[ $MINS > 0 ]]; then
+		printf "$ELPSD minutes ETA.\n"
+	fi
+
+	#set date in YY/MM/DD HH:MM:SS format
 	DT_L=`date "+%Y/%m/%d, %H:%M:%S"`
+
+	#send data to output files
 	echo $DT_L >> DBG01-$DT_N.log
 	cat /sys/class/power_supply/battery/capacity >> DBG02-$DT_N.log
 	echo $((`cat /sys/class/power_supply/battery/voltage_now`/1000)) >> DBG03-$DT_N.log
 	echo $((`cat /sys/class/power_supply/battery/temp`/10)) >> DBG04-$DT_N.log
+
+	#delay - for debug set it = 1
 	sleep 60
+
+	#prepating for refresh, ETA (must be calculated, when MINS = 1 or more, to avoid errors)
+	#How ETA Works? (MINUTES_PASSED/(100-PERCENTAGE))*PERCENTAGE 
+	#Bash only supports integers, so workaround is using bc with file...
+	PRC_NOW=`cat /sys/class/power_supply/battery/capacity`
 	let MINS=$MINS+1
+	PRC_AGO=`echo $(( 100 - $PRC_NOW ))`
+	echo "$MINS/$PRC_AGO*$PRC_NOW" > DBGTMP01-$DT_N.log
+	ELPSD=`cat DBGTMP01-$DT_N.log | bc -l`
+
+	#clear screen
+	clear
 done
