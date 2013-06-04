@@ -27,7 +27,7 @@ while [ 1 ]
 do
 
 	#infos
-	printf "                    Battery debugging mode is ON.\n         Please do not touch device till battery will die.\nStats will be send to DBG0X-DATE-TIME.log, you can make chart later.\n                        Press CTRL+C to exit\n\n$MINS minutes of test passed.\n"
+	printf "                    Battery benchmark mode is ON.\n         Please do not touch device till battery will die.\nStats will be send to DBG0X-DATE-TIME.log, you can make chart later.\n                        Press CTRL+C to exit\n\n$MINS minutes of test passed.\n"
 
 	#display elapsed time if +1 minutes of test passed
 	if [[ $MINS > 0 ]]; then
