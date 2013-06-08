@@ -4,4 +4,6 @@ Tool for updating partitions content on Allwinner A10 boards. It boots from SD c
 
 ## Preparing SD card
 
+After preparing bootable SD card with minimal Linux (eg. Linaro nano), make directory /FirmwareInstall
+
 <in progress>
