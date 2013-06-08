@@ -7,20 +7,20 @@ NEWL="printf \n"
 cd $FLASHPATH
 
 #splash rominfo
-printf "sunxi updater by ciddaemon\nv1.0.0b1 2013-06-08\nall rights reserved\n\n"
+printf "sunxi Updater by CidDaemon\nv1.0.0b1 2013-06-08\nScript comes with ABSOLUTELY NO WARRANTY. Author is not responsible by any damages caused by uncorrect usage of script.\n\n"
 
 #check if root
-printf "checking if root... "
+printf "[ ] Checking if root... "
 if [ $USER != root ]
 then
-  printf "critical err: not root!\nis sdcard properly created???"
+  printf "Error: not root!\nIs SD card properly created???"
 	exit 1
 else
 	printf "yes\n"
 fi
 
 #counting files
-printf "counting files... "
+printf "[ ] Counting files... "
 DISKDUMP_C=`ls -1 -F *.img | grep / -v | wc -l`
 ARCHIVES_C=`ls -1 -F *.t?z | grep / -v | wc -l`
 CONFIG_C=`ls -1 -F *.cfg | grep / -v | wc -l`
@@ -28,23 +28,23 @@ printf "done\n$ARCHIVES_C archives, $DISKDUMP_C disk images, $CONFIG_C config fi
 $NEWL
 
 #md5
-printf "checking md5sums... "
+printf "[ ] Checking md5sums... "
 if [ ! -f checksum.cfg ]
 then
-	printf "critical err: md5sums file not found!\nwill continue, but only u r responsible by damages!"
+	printf "Error: file with md5sums not found!\nScript will continue, but only YOU are responsible by possible damages!"
 else
 	md5sum -c checksum.cfg
 fi
 $NEWL
 
 #its the final countdownnnnnnn
-printf "starting flashing in 10 seconds, please wait...\n"
+printf "[!] Starting flashing in 10 seconds, please wait...\n"
 sleep 10
 
 #flashing, most important
 cd /dev
 
-printf "flashing device ...\n"
+printf "[ ] Flashing device ...\n"
 for NANDPART in `ls nand?`
 do
 	if [ -f $FLASHPATH/$NANDPART.t?z ]
@@ -62,10 +62,10 @@ do
 		else
 			if [ ! -f $FLASHPATH/$NANDPART.* ]
 			then
-				printf "\n$NANDPART err: file not found...."
+				printf "\n$NANDPART Error: file not found"
 				$NEWL
 			else
-				printf "\n$NANDPART err: bad file?...."
+				printf "\n$NANDPART Error: bad file?"
 				$NEWL
 			fi
 		fi
@@ -75,6 +75,6 @@ umount $FLASHPATH/tmp_nand*
 rm -rf $FLASHPATH/tmp_nand*
 
 #reboot after flash
-printf "\nflashing done!\nplease remove sd card from device and press ENTER to reboot"
+printf "\n[*] Flashing done!\nPlease remove SD card from device and then press ENTER to reboot"
 read
 reboot
