@@ -1,0 +1,7 @@
+# sunxi updater
+
+Tool for updating partitions content on Allwinner A10 boards. It boots from SD card automagically, flashes partitions and reboots - no interaction with user (yet).
+
+## Preparing SD card
+
+<in progress>
