@@ -1,6 +1,5 @@
 #!/bin/bash
-#dirty script to flash aw10 devices based on tgz txz or img files with md5 checking
-#please read readme.md to know more about making flashable cards
+#Please read readme.md to know more about making flashable cards
 
 FLASHPATH="/FirmwareUpdate"
 clear
