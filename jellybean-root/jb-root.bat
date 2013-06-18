@@ -85,7 +85,7 @@ adb push system/etc/permissions/android.hardware.usb.accessory.xml /system/etc/p
 adb push system/etc/permissions/android.software.live_wallpaper.xml /system/etc/permissions/android.software.live_wallpaper.xml
 adb push system/etc/permissions/com.android.location.provider.xml /system/etc/permissions/com.android.location.provider.xml
 adb push system/etc/permissions/platform.xml /system/etc/permissions/platform.xml
-adb push /system/etc/permissions/tablet_core_hardware.xml /system/etc/permissions/tablet_core_hardware.xml
+adb push system/etc/permissions/tablet_core_hardware.xml /system/etc/permissions/tablet_core_hardware.xml
 adb shell chmod 0644 /system/etc/permissions/android.hardware.camera.autofocus.xml
 adb shell chmod 0644 /system/etc/permissions/android.hardware.camera.flash-autofocus.xml
 adb shell chmod 0644 /system/etc/permissions/android.hardware.camera.front.xml
@@ -97,10 +97,10 @@ adb shell chmod 0644 /system/etc/permissions/android.hardware.touchscreen.multit
 adb shell chmod 0644 /system/etc/permissions/android.hardware.touchscreen.xml
 adb shell chmod 0644 /system/etc/permissions/android.hardware.usb.accessory.xml
 adb shell chmod 0644 /system/etc/permissions/android.software.live_wallpaper.xml
-adb shell chmod 0644 system/etc/permissions/com.android.location.provider.xml
-adb shell chmod 0644 system/etc/permissions/platform.xml
-adb shell chmod 0644 system/etc/permissions/tablet_core_hardware.xml
-adb shell chmod 0644 system/build.prop
+adb shell chmod 0644 /system/etc/permissions/com.android.location.provider.xml
+adb shell chmod 0644 /system/etc/permissions/platform.xml
+adb shell chmod 0644 /system/etc/permissions/tablet_core_hardware.xml
+adb shell chmod 0644 /system/build.prop
 reboot
 
 echo --- All possible things done.
