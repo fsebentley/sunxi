@@ -43,7 +43,64 @@ $1 shell rm /data/local.prop
 $1 shell rm /data/local/tmp
 $1 shell mv /data/local/tmp.bak /data/local/tmp
 $1 reboot
-echo "Done. Press enter to exit"
+
+echo "Done."
+echo ""
+echo "PATCHES FOR ROMS WITH DATA_PART BACKUP"
+echo "On some ROMs there is hidden backup,"
+echo "if you want to remove it press ENTER,"
+echo "if not press CTRL+C"
+echo "if not sure, press ENTER, it will not hurt, heh"
+read
+
+$1 shell mkdir /mnt/nandi
+$1 shell mount -t ext4 /dev/block/nandi /mnt/nandi
+$1 shell cd /mnt/nandi
+$1 shell rm -r *.gz*
+$1 reboot
+
+echo ""
+echo "BUILD.PROP WITH GOOD DPI AND UNLOCKED GPLAY"
+echo "If you have too big elements,"
+echo "or apps in Google Play are not available,"
+echo "press ENTER, it will not hurt."
+echo "If everything good, press CTR+C"
+read
+
+$1 push system/build.prop /system
+$1 push system/etc/permissions/android.hardware.camera.autofocus.xml /system/etc/permissions/android.hardware.camera.autofocus.xml
+$1 push system/etc/permissions/android.hardware.camera.flash-autofocus.xml /system/etc/permissions/android.hardware.camera.flash-autofocus.xml
+$1 push system/etc/permissions/android.hardware.camera.front.xml /system/etc/permissions/android.hardware.camera.front.xml
+$1 push system/etc/permissions/android.hardware.camera.xml /system/etc/permissions/android.hardware.camera.xml
+$1 push system/etc/permissions/android.hardware.location.gps.xml /system/etc/permissions/android.hardware.location.gps.xml
+$1 push system/etc/permissions/android.hardware.location.xml /system/etc/permissions/android.hardware.location.xml
+$1 push system/etc/permissions/android.hardware.sensor.accelerometer.xml /system/etc/permissions/android.hardware.sensor.accelerometer.xml
+$1 push system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml /system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml
+$1 push system/etc/permissions/android.hardware.touchscreen.xml /system/etc/permissions/android.hardware.touchscreen.xml
+$1 push system/etc/permissions/android.hardware.usb.accessory.xml /system/etc/permissions/android.hardware.usb.accessory.xml
+$1 push system/etc/permissions/android.software.live_wallpaper.xml /system/etc/permissions/android.software.live_wallpaper.xml
+$1 push system/etc/permissions/com.android.location.provider.xml /system/etc/permissions/com.android.location.provider.xml
+$1 push system/etc/permissions/platform.xml /system/etc/permissions/platform.xml
+$1 push system/etc/permissions/tablet_core_hardware.xml /system/etc/permissions/tablet_core_hardware.xml
+$1 shell chmod 0644 /system/etc/permissions/android.hardware.camera.autofocus.xml
+$1 shell chmod 0644 /system/etc/permissions/android.hardware.camera.flash-autofocus.xml
+$1 shell chmod 0644 /system/etc/permissions/android.hardware.camera.front.xml
+$1 shell chmod 0644 /system/etc/permissions/android.hardware.camera.xml
+$1 shell chmod 0644 /system/etc/permissions/android.hardware.location.gps.xml
+$1 shell chmod 0644 /system/etc/permissions/android.hardware.location.xml
+$1 shell chmod 0644 /system/etc/permissions/android.hardware.sensor.accelerometer.xml
+$1 shell chmod 0644 /system/etc/permissions/android.hardware.touchscreen.multitouch.distinct.xml
+$1 shell chmod 0644 /system/etc/permissions/android.hardware.touchscreen.xml
+$1 shell chmod 0644 /system/etc/permissions/android.hardware.usb.accessory.xml
+$1 shell chmod 0644 /system/etc/permissions/android.software.live_wallpaper.xml
+$1 shell chmod 0644 /system/etc/permissions/com.android.location.provider.xml
+$1 shell chmod 0644 /system/etc/permissions/platform.xml
+$1 shell chmod 0644 /system/etc/permissions/tablet_core_hardware.xml
+$1 shell chmod 0644 /system/build.prop
+$1 shell reboot
+
+echo "All possible things done."
+echo "Press ENTER to finish"
 read
 
 exit 0
